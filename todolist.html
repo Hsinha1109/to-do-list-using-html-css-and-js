@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>To-Do list</title>
+	<link href="https://fonts.googleapis.com/css2?family=Courgette&family=Ms+Madi&family=Poppins:wght@300&display=swap" rel="stylesheet"> 
+	<script src="https://kit.fontawesome.com/841cec90a3.js" crossorigin="anonymous"></script>
+	<style>
+		:root{
+			--var1:#e820ac;
+			--var2:#9e2fed;
+			--var3:#71b7e6;
+			--var4:#9b59b6;
+
+		}
+		*{
+			
+			margin: 0;
+			padding: 0;
+			box-sizing:border-box;
+		}
+		body{
+			height: 100vh;
+			background: linear-gradient(150deg, #71b7e6, #9b59b6);
+			
+		}
+
+		/* Inline #1 | http://localhost:3000/?# */
+
+
+		.container {
+			display: flex;
+			-webkit-flex-direction: column;
+			-ms-flex-direction: column;
+			flex-direction: column;
+			background: #f0e7e7;
+			margin: 100px auto 0px auto;
+			border-radius: 10px;
+			padding: 20px;
+			max-width: 800px;
+			font-size: 50px;
+			text-align: center;
+			box-shadow: 0px 3px rgba(0,0,0,0.3);
+			font-family: 'Ms Madi',cursive;
+			font-weight: 600;
+			transition:.8s ease all;
+		}
+
+		/* Element | http://localhost:3000/?# */
+
+		/* Element | http://localhost:3000/?# */
+
+		#submit {
+			font-family: 'poppins',sans-serif;
+			height: 50px;
+			background: transparent;
+			font-size: 25px;
+			color: #71b7e6;
+			width: 30%;
+			border:#71b7e6 solid 2px;
+			border-radius:5px;
+			transition: .8s ease all;
+		}
+		#submit:hover{
+			color: #9b59b6;
+			border: #9b59b6 solid 2px;
+		}
+		#form {
+			width: 80%;
+
+			margin: 20px auto;
+			height: 80px;
+		}
+
+		/* Element | http://localhost:3000/?# */
+
+		.list {
+			width: 80%;
+			margin-left: 40px;
+			padding-left: 40px;
+			font-family: 'Poppins',serif;
+			text-align: left;
+			font-size: 30px;
+		}
+
+		/* Element | http://localhost:3000/?# */
+
+		.list > ol{
+			color:#9b59b6;
+			/* list-style: none; */
+		}
+
+		/* Element | http://localhost:3000/?# */
+
+		#item {
+			font-family: 'Poppins',serif;
+			width: 60%;
+			height: 50px;
+			/* margin-right:10%; */
+			padding-left: 20px;
+			background-color:rgba(0,0,0,0) ;
+			outline:none;
+			color: #71b7e9;
+			font-weight: 500;
+			font-size: 25px;
+			border-radius: 5px;
+			border: #71b7e6 solid 2px;
+			transition:all .8s ease ;
+		}
+		#item:hover{
+			border: #9b59b6 solid 2px;
+			color: #9B59B6;
+		}
+		#item:focus{
+			border: #9b59b6 solid 2px ;
+		}
+		.title{
+			color:#71b7e6 ;
+			transition: .8s ease all;
+		}
+		.title:hover{
+			color: #9659b6;
+		}
+
+		/* Element | http://localhost:3000/ */
+
+		i {
+			position: absolute;
+			right: 330px;
+			color: #71b7e6;
+			font-size: 53px;
+			transition:2s ease all;
+		}
+		i:hover{
+			color: #9659b6;
+		}
+		/* Element | http://localhost:3000/ */
+		#sun{
+			transition:.8s ease all;
+		}
+		#moon  {
+			transition:.8s ease all;
+			display: none;
+		}
+		.dark{
+			background: #101010;
+		}
+		
+		/* Element | http://localhost:3000/ */
+
+		.button {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: 20px;
+		}
+
+		/* Inline #5 | http://localhost:3000/ */
+
+		#clear {
+			/* w25%: ; */
+			height: 50px;
+			background: transparent;
+			width: 25%;
+			border:2px var(--var3) solid;
+			font-size: 25px;
+			border-radius:5px;
+			font-family: poppins;
+			color: var(--var3);
+			transition: .8s ease;
+		}
+		#clear:hover{
+			color: var(--var2);
+			border:2px var(--var2) solid;
+		}
+
+
+
+	</style>
+</head>
+<body>
+	<div class="container"><div class="title">To-Do List</div>
+
+	<i id='sun'class="fa-regular fa-sun"></i><i id='moon'class="fa-regular fa-moon"></i>
+	<form action="#" id="form">
+		<input type="text" id="item" placeholder="Enter the item ">
+		<input type="submit" value="Submit" id='submit'>
+	</form>
+	<div class="list">
+		<ol id='ol'>
+
+		</ol>
+		
+	</div>
+	<div class="button"><button id="clear">Clear List</button></div>
+</div>
+<script>
+	list=[]
+	window.addEventListener('DOMContentLoaded', () => {
+		console.log(localStorage.getItem('todolist'));
+		var arr = JSON.parse(localStorage.todolist);
+		list.concat(arr);
+		// console.log(arr);
+		for (i=0;i<arr.length;i++){
+			ListItem=document.createElement('li');
+			console.log(ListItem);
+			ListItem.innerHTML=arr[i];
+			document.querySelector('ol').append(ListItem);
+		}	
+	});
+	document.querySelector("#submit").disabled=true;
+	document.querySelector("#item").value='';
+	document.querySelector('#item').onkeyup = ()=>{
+		document.querySelector("#submit").disabled=false;
+		if (document.querySelector("#item").value.length<=0 || document.querySelector("#item").value=='') {
+			document.querySelector("#submit").disabled=true;
+		}}
+		document.querySelector('#form').onsubmit =()=>{
+			let item=document.querySelector("#item").value;	//
+			list.push(item);
+			localStorage.todolist = JSON.stringify(list);
+			var array_after_load = JSON.parse(localStorage.todolist);
+			// console.log(array_after_load)
+			for (i=0;i<array_after_load.length;i++){
+				ListItem=document.createElement('li');
+				ListItem.innerHTML=array_after_load[i];
+			}			
+			document.querySelector('ol').append(ListItem);
+			// console.log(item);
+			document.querySelector("#item").value='';
+			document.querySelector("#submit").disabled=true;
+			return false;
+		}
+		document.querySelector('#sun').onclick=()=>{
+			document.querySelector('.container').classList.add('dark');
+			document.querySelector('#sun').style.display='none';
+			document.querySelector('#moon').style.display='block';
+		} 
+		document.querySelector('#moon').onclick=()=>{
+			document.querySelector('.container').classList.remove('dark');
+			document.querySelector('#sun').style.display='block';
+			document.querySelector('#moon').style.display='none';
+		} 
+		document.querySelector('#clear').onclick=()=>{
+			localStorage.clear();
+			document.querySelector('#ol').innerHTML='';
+			}
+	</script> 
+</body>
+</html>
