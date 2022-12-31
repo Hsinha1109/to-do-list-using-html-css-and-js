@@ -32,7 +32,7 @@
 			max-width: 800px;
 			font-size: 50px;
 			text-align: center;
-			box-shadow: 0px 3px rgba(0,0,0,0.3);
+			box-shadow: 3px 3px rgba(0,0,0,0.3);
 			font-family: 'Ms Madi',cursive;
 			font-weight: 600;
 			transition:.8s ease all;
